@@ -67,21 +67,21 @@ def filter_moves(matrix , moves):
             moves_.append(move)
     return moves_
 
-def dfs(matrix):
+def dfs(matrix, path=[]):
     if is_solved(matrix):
-        print("matrix escaped!!")
-        return 
+        print("Matrix escaped!")
+        # print("Path to solution:", path)
+        return path
     valid_moves = get_valid_moves(matrix)
-    valid_moves = filter_moves(matrix,valid_moves)
+    valid_moves = filter_moves(matrix, valid_moves)
     if not valid_moves:
         print("No valid moves left!")
-        return
-
-    print(valid_moves)
+        return None
     for move in valid_moves:
-        print("move picked ", move)
-        temp = make_move(matrix,move)
-        print_matrix(temp)
-        dfs(temp)
-
-dfs(matrix)
+        temp = make_move(matrix, move)
+        result = dfs(temp, path + [move])
+        if result:
+            return result
+matrix_3 = [[0, 3, 5, 1], [5, 1, 5, 0], [2, 0, 0, 2], [2, 5, 3, 1], [1, 3, 2, 3], [], []]
+sol = dfs(matrix_3)
+print(sol)
