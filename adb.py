@@ -7,3 +7,4 @@ def get_screenshrot():
     with open("screen.png", "wb") as fp:
         fp.write(result)
 
+get_screenshrot()
